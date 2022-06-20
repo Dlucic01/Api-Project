@@ -1,0 +1,17 @@
+{
+    "autoload": {
+        "psr-4": {
+            "Database\\": "config/",
+            "App\\": "src/",
+            "Values\\": "lib/",
+            "Upload\\": "bin/",
+            "Controller\\": "Controller/",
+            "Model\\": "Model/",
+            "Validators\\": "lib/"
+        }
+    },
+    "require": {
+        "fzaninotto/faker": "^1.9",
+        "ext-pdo": "*"
+    }
+}
