@@ -40,14 +40,6 @@ class MealsData
         }
 
 
-        if (!isset($_GET['diff_time'])) {
-            $sql .= " AND status='created'";
-        }
-
-        if (isset($_GET['diff_time'])) {
-            $sql .= " AND DATE(created_at) > " . $diff_time;
-        }
-
         if (isset($_GET['per_page'])) {
             $sql .= " LIMIT " . MetaParser::showRows() . "," . MetaParser::getPerPage();
         }
@@ -71,7 +63,11 @@ class MealsData
         $lang = '"' . ValidUrl::validate($_GET['lang']) . '"';
 
         $sql = "SELECT title FROM " . $db . ".meals_names
-                WHERE status='created' AND locale =" . $lang;
+                WHERE locale =" . $lang;
+
+        if (!DiffTime::validDiffTime()) {
+            $sql .= " AND status ='created'";
+        }
 
         $pdo = $this->dbConnInterface->connect();
         $stmt = $pdo->prepare($sql);
