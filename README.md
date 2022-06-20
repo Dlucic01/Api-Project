@@ -20,20 +20,28 @@ src directory contains Model and Controller
 <hr>
 
 <p>To upload a new fake Meal:</p>
-<p>use "php bin/UploadMeals.php"</p>
+
+        php bin/UploadMeals.php
+   
+<br>
+
 
 <p>To upload a new Tag or Ingredients</p>
 
         php bin/UploadTags.php or bin/UploadIngredients.php
+   <br>
+
    
 <p>To join a Meal with a Category:</p>
 
         php UpdateMeals.php category [meal id] [category id]
 
-   
+   <br>
+
 <p>To update Meal status:</p>
 
         php UpdateMeals.php status [0=created, 1=modified, 2=deleted] [meal id]
+<br>
 
    
 <p>To join meal with a tag:</p>
@@ -41,7 +49,8 @@ src directory contains Model and Controller
         php join.php tags [meal id] [tag id]
 
 
-   
+   <br>
+
 <p>To join meal with an ingredient:</p>
 
         php join.php ingredients [meal id] [ingredient id]
