@@ -8,7 +8,7 @@ Core directory holds all core files such as:
 <p>bin - used for uploading fake Meals, Categories, Tags, Ingredients and for adding joins</p>
 
 
-src directory contains Model and Controller
+<p>src - directory contains Model and Controller</p>
 
 <hr>
 <br>
