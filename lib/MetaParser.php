@@ -85,6 +85,14 @@ class MetaParser
                     'next' => $linkNull
                 ]
             ];
+        } elseif (is_nan($totalPages)) {
+            $links = [
+                'links' => [
+                    'previous' => $linkNull,
+                    'self' => $fullLink,
+                    'next' => $linkNull,
+                ]
+            ];
         } elseif ($page == $totalPages) {
             $links = [
                 'links' => [
