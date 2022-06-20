@@ -6,7 +6,7 @@ use Database\DBConnInterface;
 use Database\SQLConnection;
 
 require_once "../config/SQLConnection.php";
-
+require_once "../config/config.php";
 
 
 

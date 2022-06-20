@@ -70,7 +70,7 @@ class Category
         $db = $this->dbName;
         $id = $params["id"];
 
-        $sql = "SELECT " . $db . ".meals_names.id, " . $db . ".meals_names.title,"
+        $sql = "SELECT " . $db . ".meals_names.meals_id AS id, " . $db . ".meals_names.title,"
             . $db . ".meals_names.description, " . $db . ".meals_names.status
              FROM " . $db . ".meals_names
              INNER JOIN " . $db . ".meals

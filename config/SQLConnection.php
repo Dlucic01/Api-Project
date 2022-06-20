@@ -30,7 +30,7 @@ class SQLConnection implements DBConnInterface
         $dbc = 'mysql:host=localhost;$dbname=' . $db . ';charset=UTF8';
 
         try {
-            $pdo = new PDO($dbc, '', '');
+            $pdo = new PDO($dbc, 'exof', 'Mumija12');
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $this->pdo = $pdo;
             return $pdo;

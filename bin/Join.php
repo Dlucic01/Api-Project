@@ -7,6 +7,7 @@ use Database\SQLConnection;
 use Values\MealsColumns;
 
 require_once "../config/SQLConnection.php";
+require_once "../config/config.php";
 require_once "./GenerateSQL.php";
 
 class Join

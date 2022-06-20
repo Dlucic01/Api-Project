@@ -13,6 +13,7 @@ use Upload\SlugMaker;
 require_once "../config/SQLConnection.php";
 require_once "./GenerateSQL.php";
 require_once "./SlugMaker.php";
+require_once "../config/config.php";
 
 class UploadCategory
 {

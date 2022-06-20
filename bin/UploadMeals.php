@@ -11,6 +11,7 @@ use Values\MealsColumns;
 
 require_once "../config/SQLConnection.php";
 require_once "./GenerateSQL.php";
+require_once "../config/config.php";
 
 
 class UploadMeals
