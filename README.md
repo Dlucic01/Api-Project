@@ -3,9 +3,9 @@
 
 Core directory holds all core files such as:
 
-config/SQLConnection.php - holds information for mysql username and password,
-config/config.php - holds database name
-bin - used for uploading fake Meals, Categories, Tags, Ingredients and for adding joins
+<p>config/SQLConnection.php - holds information for mysql username and password,</p>
+<p>config/config.php - holds database name</p>
+<p>bin - used for uploading fake Meals, Categories, Tags, Ingredients and for adding joins</p>
 
 
 src directory contains Model and Controller
