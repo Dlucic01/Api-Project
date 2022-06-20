@@ -13,7 +13,7 @@ use Values\TagsColumns;
 require_once "../config/SQLConnection.php";
 require_once "./GenerateSQL.php";
 require_once "./SlugMaker.php";
-
+require_once "../config/config.php";
 
 class UploadTags
 {
@@ -58,7 +58,11 @@ class UploadTags
             $faker_cat[] = $faker_category;
         }
 
-        $slug = SlugMaker::slugMaker($faker_cat[0]);
+        $slug = [
+            0 => SlugMaker::slugMaker($faker_cat[0]),
+            1 => SlugMaker::slugMaker($faker_cat[1]),
+            2 => SlugMaker::slugMaker($faker_cat[2]),
+        ];
 
 
         print("<pre>" . print_r($locale, true) . "</pre>");
@@ -99,7 +103,7 @@ class UploadTags
 
             $stmt->bindValue($tableValues["column"][2], $params["title"][$i]);
 
-            $stmt->bindValue($tableValues["column"][3], $params["slug"]);
+            $stmt->bindValue($tableValues["column"][3], $params["slug"][$i]);
 
             $stmt->execute();
         }
