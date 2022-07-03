@@ -14,7 +14,7 @@ use Model\With;
 
 require_once "./SearchEngine.php";
 
-require_once("/srv/www/apache/vendor/autoload.php");
+require_once("./vendor/autoload.php");
 
 header("Content-Type: application/json; charset=utf-8");
 

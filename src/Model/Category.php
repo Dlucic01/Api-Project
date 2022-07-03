@@ -27,7 +27,12 @@ class Category
 
         $lang = $params["lang"];
         $id = $params["id"];
+        $diffTime = DiffTime::validDiffTime();
         $db = $this->dbName;
+
+        $sqlFilter = $db . ".meals.category_id " . $id . " AND " . $db
+            . ".meals_names.locale =" . $lang;
+
 
 
         $sql = "SELECT " . $db . ".meals_names.meals_id AS id, " . $db
@@ -36,13 +41,22 @@ class Category
               FROM " . $db . ".meals_names
               INNER JOIN " . $db . ".meals
               ON meals.id = meals_names.meals_id
-              WHERE " . $db . ".meals.category_id " . $id . " AND " . $db
-            . ".meals_names.locale =" . $lang;
-
+              WHERE " . $sqlFilter;
 
         if (!DiffTime::validDiffTime()) {
             $sql .= " AND status ='created'";
         }
+
+        if (DiffTime::validDiffTime()) {
+            $sql .= " AND meals_names.created_at between " . "'" . $diffTime . "'"
+                . " AND NOW()"
+                . " OR " . $sqlFilter . " AND locale= " . $lang
+                . " AND updated_at between " . "'" . $diffTime . "'" . " AND NOW()"
+                . " OR  " . $sqlFilter . " AND locale= " . $lang
+                . " AND deleted_at between " . "'" . $diffTime . "'" . " AND NOW()";
+        }
+
+        #  echo $sql;
 
         if (isset($_GET['per_page'])) {
             $sql .= " LIMIT " . MetaParser::showRows() . ","
@@ -69,17 +83,34 @@ class Category
 
         $db = $this->dbName;
         $id = $params["id"];
+        $diffTime = DiffTime::validDiffTime();
+
+        $sqlFilter = $db . ".meals.category_id " . $id . " AND " . $db
+            . ".meals_names.locale =" . $lang;
 
         $sql = "SELECT " . $db . ".meals_names.meals_id AS id, " . $db . ".meals_names.title,"
             . $db . ".meals_names.description, " . $db . ".meals_names.status
              FROM " . $db . ".meals_names
              INNER JOIN " . $db . ".meals
              ON meals.id = meals_names.meals_id
-             WHERE " . $db . ".meals.category_id " . $id . " AND " . $db . ".meals_names.locale =" . $lang;
+             WHERE " . $sqlFilter;
+
 
         if (!DiffTime::validDiffTime()) {
             $sql .= " AND status ='created'";
         }
+
+
+        if (DiffTime::validDiffTime()) {
+            $sql .= " AND meals_names.created_at between " . "'" . $diffTime . "'"
+                . " AND NOW()"
+                . " OR " . $sqlFilter . " AND locale= " . $lang
+                . " AND updated_at between " . "'" . $diffTime . "'" . " AND NOW()"
+                . " OR  " . $sqlFilter . " AND locale= " . $lang
+                . " AND deleted_at between " . "'" . $diffTime . "'" . " AND NOW()";
+        }
+
+
 
         if (isset($_GET['per_page'])) {
             $sql .= " LIMIT " . MetaParser::showRows() . "," . MetaParser::getPerPage();
@@ -112,23 +143,34 @@ class Category
         }
 
 
-        $db = $this->dbName;
         $lang = '"' . $_GET["lang"] . '"';
+        $diffTime = DiffTime::validDiffTime();
+        $db = $this->dbName;
+
+        $sqlFilter = $db . ".meals.category_id " . $id . " AND " . $db
+            . ".meals_names.locale =" . $lang;
+
 
         $sql = "SELECT " . $db . ".meals_names.meals_id AS id, " . $db
-            . ".meals_names.title, "
-            . $db . ".meals_names.description, " . $db . ".meals_names.status
+            . ".meals_names.title, " . $db . ".meals_names.description, "
+            . $db . ".meals_names.status
               FROM " . $db . ".meals_names
               INNER JOIN " . $db . ".meals
               ON meals.id = meals_names.meals_id
-              WHERE " . $db . ".meals.category_id " . $id . " AND " . $db
-            . ".meals_names.locale =" . $lang;
-
+              WHERE " . $sqlFilter;
 
         if (!DiffTime::validDiffTime()) {
             $sql .= " AND status ='created'";
         }
 
+        if (DiffTime::validDiffTime()) {
+            $sql .= " AND meals_names.created_at between " . "'" . $diffTime . "'"
+                . " AND NOW()"
+                . " OR " . $sqlFilter . " AND locale= " . $lang
+                . " AND updated_at between " . "'" . $diffTime . "'" . " AND NOW()"
+                . " OR  " . $sqlFilter . " AND locale= " . $lang
+                . " AND deleted_at between " . "'" . $diffTime . "'" . " AND NOW()";
+        }
 
 
 

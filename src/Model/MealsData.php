@@ -27,23 +27,34 @@ class MealsData
 
 
         $lang = $params['lang'];
-        $diff_time = $params['diff_time'];
+        $diffTime = DiffTime::validDiffTime();
         $table = $db . $params['table'];
 
         #        echo "test";
 
-        $sql = "SELECT meals_id AS id, title, description, status FROM " .
-            $table . " WHERE locale=" . $lang;
+        $sql = "SELECT meals_id AS id, title, description, status FROM "
+            . $table . " WHERE locale=" . $lang;
+
 
         if (!DiffTime::validDiffTime()) {
             $sql .= " AND status ='created'";
         }
 
 
+        #  echo $diffTime;
+
+        if (DiffTime::validDiffTime()) {
+            $sql .= " AND created_at between " . "'" . $diffTime . "'" . " AND NOW()"
+                . " OR locale= " . $lang . " AND updated_at between " . "'"
+                . $diffTime . "'" . " AND NOW()"
+                . " OR locale= " . $lang . " AND deleted_at between " . "'"
+                . $diffTime . "'" . " AND NOW()";
+        }
+
+
         if (isset($_GET['per_page'])) {
             $sql .= " LIMIT " . MetaParser::showRows() . "," . MetaParser::getPerPage();
         }
-
 
 
         # echo $sql;
@@ -61,12 +72,21 @@ class MealsData
     {
         $db = $this->dbName;
         $lang = '"' . ValidUrl::validate($_GET['lang']) . '"';
+        $diffTime = DiffTime::validDiffTime();
 
         $sql = "SELECT title FROM " . $db . ".meals_names
                 WHERE locale =" . $lang;
 
         if (!DiffTime::validDiffTime()) {
             $sql .= " AND status ='created'";
+        }
+
+        if (DiffTime::validDiffTime()) {
+            $sql .= " AND created_at between " . "'" . $diffTime . "'" . " AND NOW()"
+                . " OR locale= " . $lang . " AND updated_at between " . "'"
+                . $diffTime . "'" . " AND NOW()"
+                . " OR locale= " . $lang . " AND deleted_at between " . "'"
+                . $diffTime . "'" . " AND NOW()";
         }
 
         $pdo = $this->dbConnInterface->connect();
