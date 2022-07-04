@@ -8,16 +8,13 @@ class DiffTime
      * Validate diff_time parameter
      */
 
-    public static function validDiffTime()
+    public static function validDiffTime(): bool
     {
 
-        $diffTime = $_GET['diff_time'];
-        $diffTime = gmdate("Y-m-d H:i:s", $diffTime);
-
         if (
-            isset($diffTime)
-            && (int) $diffTime <= 0
-            || (int) $diffTime > time()
+            isset($_GET['diff_time'])
+            && (int) $_GET['diff_time'] <= 0
+            || (int) $_GET['diff_time'] > time()
         ) {
             echo "Diff time can't be <= 0 or > current UNIX time";
             return false;
@@ -25,6 +22,12 @@ class DiffTime
 
             return false;
         }
-        return $diffTime;
+        return true;
+    }
+
+    public static function formatDiffTime(): string
+    {
+        $diffTime = $_GET['diff_time'];
+        return gmdate("Y-m-d H:i:s", $diffTime);
     }
 }
