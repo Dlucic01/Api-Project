@@ -7,7 +7,7 @@ use PDOException;
 use Database\Constants;
 
 
-require '/srv/www/apache/vendor/autoload.php';
+require __DIR__ . '../../vendor/autoload.php';
 
 
 interface DBConnInterface
